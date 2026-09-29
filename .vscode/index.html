@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AgriPath | From Soil to Harvest</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <span class="logo-icon">🌱</span>
+            <span>Agri<span class="logo-green">Path</span></span>
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#journey">7 Stages</a>
+            <a href="#knowledge">Knowledge Base</a>
+            <a href="#gallery">Gallery</a>
+        </nav>
+
+        <button class="nav-button" onclick="scrollToJourney()">
+            Explore Journey
+        </button>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="hero-content">
+
+                <div class="eyebrow">
+                    <span>✦</span>
+                    THE AGRICULTURAL JOURNEY
+                </div>
+
+                <h1>
+                    From <span>Soil</span><br>
+                    to Harvest.
+                </h1>
+
+                <p>
+                    Discover the seven essential stages of agriculture —
+                    from building fertile soil and selecting the right seed
+                    to nurturing crops and bringing the harvest home.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <button
+                        class="primary-button"
+                        onclick="scrollToJourney()">
+                        Explore the 7 Stages
+                        <span>→</span>
+                    </button>
+
+                    <button
+                        class="secondary-button"
+                        onclick="scrollToKnowledge()">
+                        Knowledge Base
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-visual">
+
+                <div class="hero-image-wrapper">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1400&q=85"
+                        alt="Agricultural field">
+
+                </div>
+
+                <div class="floating-card">
+
+                    <div class="floating-icon">
+                        🌾
+                    </div>
+
+                    <div>
+                        <strong>7 Stages</strong>
+                        <small>From soil to harvest</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= STATS ================= -->
+
+        <section class="stats-section">
+
+            <div class="stat-card">
+
+                <div class="stat-number">
+                    07
+                </div>
+
+                <div>
+                    <strong>Major Stages</strong>
+                    <span>From soil to harvest</span>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-number">
+                    ∞
+                </div>
+
+                <div>
+                    <strong>Knowledge</strong>
+                    <span>Expandable knowledge base</span>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-number">
+                    🌱
+                </div>
+
+                <div>
+                    <strong>Crop Journey</strong>
+                    <span>Grow smarter, farm better</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= JOURNEY ================= -->
+
+        <section class="journey-section" id="journey">
+
+            <div class="section-header">
+
+                <div class="section-label">
+                    THE COMPLETE JOURNEY
+                </div>
+
+                <h2>
+                    Seven Steps.<br>
+                    <span>One Harvest.</span>
+                </h2>
+
+                <p>
+                    Agriculture is a connected system. Each stage
+                    prepares the foundation for the next.
+                </p>
+
+            </div>
+
+
+            <!-- Journey Progress -->
+
+            <div class="journey-line">
+
+                <div class="progress-line"></div>
+
+                <div class="progress-point active">
+                    <span>01</span>
+                </div>
+
+                <div class="progress-point">
+                    <span>02</span>
+                </div>
+
+                <div class="progress-point">
+                    <span>03</span>
+                </div>
+
+                <div class="progress-point">
+                    <span>04</span>
+                </div>
+
+                <div class="progress-point">
+                    <span>05</span>
+                </div>
+
+                <div class="progress-point">
+                    <span>06</span>
+                </div>
+
+                <div class="progress-point">
+                    <span>07</span>
+                </div>
+
+            </div>
+
+
+            <!-- ================= STAGE CARDS ================= -->
+
+            <div class="stages-grid" id="stagesContainer">
+            </div>
+
+        </section>
+
+
+        <!-- ================= KNOWLEDGE BASE ================= -->
+
+        <section class="knowledge-section" id="knowledge">
+
+            <div class="knowledge-content">
+
+                <div class="section-label">
+                    KNOWLEDGE SYSTEM
+                </div>
+
+                <h2>
+                    Your Agricultural
+                    <span>Knowledge Base.</span>
+                </h2>
+
+                <p>
+                    A dedicated space for your agricultural knowledge,
+                    research papers, crop profiles, soil information,
+                    farming practices and recovery guidelines.
+                </p>
+
+                <div class="knowledge-features">
+
+                    <div>
+                        <span>📚</span>
+                        <p>Research Papers</p>
+                    </div>
+
+                    <div>
+                        <span>🌱</span>
+                        <p>Crop Profiles</p>
+                    </div>
+
+                    <div>
+                        <span>🧪</span>
+                        <p>Soil Data</p>
+                    </div>
+
+                    <div>
+                        <span>🚜</span>
+                        <p>Farm Practices</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="knowledge-placeholder">
+
+                <div class="database-icon">
+                    🗄️
+                </div>
+
+                <h3>
+                    Knowledge Base
+                </h3>
+
+                <p>
+                    Data will be connected here.
+                </p>
+
+                <div class="placeholder-status">
+                    <span></span>
+                    NOT CONNECTED
+                </div>
+
+                <button class="upload-button">
+                    + Add Knowledge
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= GALLERY ================= -->
+
+        <section class="gallery-section" id="gallery">
+
+            <div class="section-header">
+
+                <div class="section-label">
+                    FARMING IN ACTION
+                </div>
+
+                <h2>
+                    Life Behind
+                    <span>the Harvest.</span>
+                </h2>
+
+                <p>
+                    Every harvest begins long before the first crop is picked.
+                </p>
+
+            </div>
+
+
+            <div class="gallery-grid">
+
+                <div class="gallery-large gallery-item">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1200&q=85"
+                        alt="Agricultural field">
+
+                    <div class="gallery-overlay">
+                        <span>01</span>
+                        <strong>The Field</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="gallery-item">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=800&q=85"
+                        alt="Soil preparation">
+
+                    <div class="gallery-overlay">
+                        <span>02</span>
+                        <strong>The Soil</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="gallery-item">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1492496913980-501348b61469?auto=format&fit=crop&w=800&q=85"
+                        alt="Planting crops">
+
+                    <div class="gallery-overlay">
+                        <span>03</span>
+                        <strong>Planting</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="gallery-item">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=800&q=85"
+                        alt="Irrigation">
+
+                    <div class="gallery-overlay">
+                        <span>04</span>
+                        <strong>Water</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="gallery-item">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=800&q=85"
+                        alt="Growing crops">
+
+                    <div class="gallery-overlay">
+                        <span>05</span>
+                        <strong>Growth</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="gallery-item">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=85"
+                        alt="Mature crops">
+
+                    <div class="gallery-overlay">
+                        <span>06</span>
+                        <strong>Maturity</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="gallery-item">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1504306660634-ec50d8f6b1b3?auto=format&fit=crop&w=800&q=85"
+                        alt="Harvest">
+
+                    <div class="gallery-overlay">
+                        <span>07</span>
+                        <strong>Harvest</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CTA ================= -->
+
+        <section class="final-cta">
+
+            <div>
+
+                <div class="section-label">
+                    BUILD • GROW • HARVEST
+                </div>
+
+                <h2>
+                    Agriculture is a journey,
+                    <br>
+                    <span>not a single step.</span>
+                </h2>
+
+            </div>
+
+            <button
+                class="primary-button"
+                onclick="scrollToJourney()">
+                Start Exploring →
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-logo">
+            🌱 Agri<span>Path</span>
+        </div>
+
+        <p>
+            From healthy soil to a successful harvest.
+        </p>
+
+        <div class="footer-bottom">
+            © 2026 AgriPath. Agricultural Knowledge Platform.
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
