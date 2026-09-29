@@ -110,20 +110,20 @@ const agricultureStages = [
 
 
     {
-        number: "07",
-        title: "🧺 Harvest & Post-Harvest",
-        image: "https://images.unsplash.com/photo-1504306660634-ec50d8f6b1b3?auto=format&fit=crop&w=1000&q=85",
+    number: "07",
+    title: "🧺 Harvest & Post-Harvest",
+    image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1000&q=85",
 
-        description:
-            "Harvest at the correct stage and preserve crop quality through sorting, drying and storage.",
+    description:
+        "Harvest at the correct stage and preserve crop quality through sorting, drying and storage.",
 
-        activities: [
-            "Harvest",
-            "Sorting",
-            "Drying",
-            "Storage"
-        ]
-    }
+    activities: [
+        "Harvest",
+        "Sorting",
+        "Drying",
+        "Storage"
+    ]
+}
 
 ];
 
