@@ -1,0 +1,470 @@
+{
+  "scenario_id": "SCENARIO_04",
+  "scenario_name": "Overgrazed Pastureland",
+  "problem_class": [
+    "soil_compaction",
+    "soil_depletion",
+    "vegetation_degradation"
+  ],
+  "objective": "Diagnose degraded pastureland from multimodal evidence and produce an ordered soil-recovery and planting strategy that generalizes across unseen variants.",
+
+  "principles": [
+    "Diagnose before recommending plants.",
+    "Treat compaction and fertility depletion as separate but interacting constraints.",
+    "Use multiple independent cues before making a strong diagnosis.",
+    "Do not infer a specific nutrient deficiency from appearance alone.",
+    "Restore soil conditions before expecting reliable crop establishment.",
+    "Prevent continued degradation while restoration is underway.",
+    "Prefer conditional recommendations over one-size-fits-all prescriptions."
+  ],
+
+  "input_evidence": {
+    "visual_cues": {
+      "hard_packed_surface": {
+        "supports": ["soil_compaction"],
+        "strength": "high"
+      },
+      "surface_puddling_after_rain": {
+        "supports": ["poor_infiltration", "soil_compaction"],
+        "strength": "high"
+      },
+      "water_not_entering_soil": {
+        "supports": ["poor_infiltration", "soil_compaction"],
+        "strength": "high"
+      },
+      "bare_patches": {
+        "supports": ["vegetation_degradation", "erosion_risk"],
+        "strength": "medium"
+      },
+      "thin_sparse_grass": {
+        "supports": ["overgrazing_history", "vegetation_degradation"],
+        "strength": "medium"
+      },
+      "grass_grazed_close_to_ground": {
+        "supports": ["overgrazing_history"],
+        "strength": "high"
+      },
+      "low_visible_organic_matter": {
+        "supports": ["soil_depletion", "poor_soil_structure"],
+        "strength": "medium"
+      },
+      "pale_or_weak_vegetation": {
+        "supports": ["possible_nutrient_depletion", "general_plant_stress"],
+        "strength": "low_to_medium",
+        "warning": "Does not establish a specific nutrient deficiency."
+      },
+      "uneven_degradation": {
+        "supports": ["localized_compaction", "localized_depletion"],
+        "strength": "medium"
+      },
+      "flat_open_pasture": {
+        "supports": ["pasture_land_use"],
+        "strength": "low"
+      }
+    },
+
+    "textual_cues": {
+      "history_of_heavy_grazing": {
+        "supports": ["overgrazing_history", "vegetation_degradation"],
+        "strength": "high"
+      },
+      "water_pools_after_rain": {
+        "supports": ["poor_infiltration", "soil_compaction"],
+        "strength": "high"
+      },
+      "soil_feels_hard": {
+        "supports": ["soil_compaction"],
+        "strength": "high"
+      },
+      "vegetation_is_thin": {
+        "supports": ["vegetation_degradation"],
+        "strength": "medium"
+      },
+      "soil_is_pale_or_washed_out": {
+        "supports": ["possible_soil_depletion"],
+        "strength": "low_to_medium"
+      },
+      "no_animals_currently_present": {
+        "supports": [],
+        "warning": "Do not infer that grazing is currently occurring."
+      }
+    }
+  },
+
+  "diagnosis": {
+    "scoring_model": {
+      "high_evidence": 3,
+      "medium_evidence": 2,
+      "low_to_medium_evidence": 1,
+      "low_evidence": 1
+    },
+
+    "primary_diagnosis_rules": [
+      {
+        "if": [
+          "hard_packed_surface",
+          "AND",
+          "poor_infiltration OR surface_puddling"
+        ],
+        "then": {
+          "diagnosis": "soil_compaction",
+          "confidence": "high"
+        }
+      },
+      {
+        "if": [
+          "hard_packed_surface",
+          "AND",
+          "sparse_or_degraded_vegetation"
+        ],
+        "then": {
+          "diagnosis": "soil_compaction",
+          "confidence": "medium_to_high"
+        }
+      },
+      {
+        "if": [
+          "heavy_grazing_history",
+          "AND",
+          "thin_or_depleted_vegetation"
+        ],
+        "then": {
+          "diagnosis": "vegetation_degradation",
+          "confidence": "high"
+        }
+      },
+      {
+        "if": [
+          "low_organic_matter",
+          "AND",
+          "weak_vegetation"
+        ],
+        "then": {
+          "diagnosis": "possible_soil_depletion",
+          "confidence": "medium"
+        }
+      },
+      {
+        "if": [
+          "compaction_evidence",
+          "AND",
+          "depletion_evidence"
+        ],
+        "then": {
+          "diagnosis": "combined_compaction_and_depletion",
+          "confidence": "high"
+        }
+      }
+    ],
+
+    "diagnostic_separation": {
+      "compaction": {
+        "primary_signals": [
+          "hard_surface",
+          "poor_infiltration",
+          "surface_puddling",
+          "pressed_down_ground",
+          "restricted_root_penetration"
+        ]
+      },
+      "depletion": {
+        "primary_signals": [
+          "weak_regrowth",
+          "low_organic_matter",
+          "persistent_sparse_cover",
+          "possible_pale_vegetation"
+        ],
+        "caution": "Visual cues indicate possible depletion but cannot identify exact nutrient shortages."
+      }
+    },
+
+    "alternative_explanations": [
+      {
+        "observation": "surface_hardness",
+        "possible_alternatives": [
+          "naturally clay-rich soil",
+          "dry soil",
+          "rocky soil"
+        ],
+        "required_confirmation": [
+          "poor_infiltration",
+          "physical evidence of traffic or grazing",
+          "root penetration difficulty"
+        ]
+      },
+      {
+        "observation": "surface_puddling",
+        "possible_alternatives": [
+          "recent extreme rainfall",
+          "naturally poorly drained terrain",
+          "compaction"
+        ],
+        "required_confirmation": [
+          "persistent poor infiltration",
+          "hard-packed surface",
+          "traffic/grazing history"
+        ]
+      },
+      {
+        "observation": "pale vegetation",
+        "possible_alternatives": [
+          "nutrient stress",
+          "drought",
+          "disease",
+          "root stress",
+          "natural senescence"
+        ],
+        "rule": "Never infer a specific nutrient deficiency from color alone."
+      }
+    ]
+  },
+
+  "priority_logic": [
+    {
+      "priority": 1,
+      "action": "reduce_or_stop_further_degradation",
+      "condition": "active grazing or repeated heavy traffic is occurring",
+      "reason": "Restoration will be undermined if compaction and vegetation removal continue."
+    },
+    {
+      "priority": 2,
+      "action": "protect_exposed_soil",
+      "condition": "bare soil is extensive",
+      "reason": "Bare soil is vulnerable to erosion, crusting, moisture loss, and further degradation."
+    },
+    {
+      "priority": 3,
+      "action": "address_compaction",
+      "condition": "compaction is diagnosed",
+      "reason": "Roots and water cannot function normally in severely compacted soil."
+    },
+    {
+      "priority": 4,
+      "action": "rebuild_soil_organic_matter_and_fertility",
+      "condition": "depletion is diagnosed or strongly suspected",
+      "reason": "Improved structure alone does not restore lost fertility."
+    },
+    {
+      "priority": 5,
+      "action": "establish_appropriate_vegetation",
+      "condition": "soil is sufficiently prepared for establishment",
+      "reason": "Vegetation should reinforce recovery rather than be planted into conditions that prevent establishment."
+    },
+    {
+      "priority": 6,
+      "action": "maintain_cover_and_prevent_recompaction",
+      "condition": "vegetation is established",
+      "reason": "Long-term recovery depends on maintaining biological and physical soil structure."
+    }
+  ],
+
+  "intervention_rules": {
+    "decompaction": [
+      {
+        "condition": "moderate_compaction",
+        "recommend": [
+          "reduce_traffic",
+          "allow_soil_to_recover",
+          "use_appropriate_aeration_or_shallow_decompaction_when_conditions_allow",
+          "increase_organic_matter"
+        ]
+      },
+      {
+        "condition": "severe_compaction",
+        "recommend": [
+          "avoid unnecessary disturbance",
+          "address the compacted layer using site-appropriate mechanical or biological methods",
+          "follow with organic-matter-building practices"
+        ]
+      }
+    ],
+
+    "organic_matter": [
+      {
+        "condition": "low_organic_matter_or_poor_structure",
+        "recommend": [
+          "well-managed organic amendments where appropriate",
+          "retained plant residues",
+          "cover crops or restorative vegetation",
+          "reduced soil disturbance"
+        ]
+      }
+    ],
+
+    "fertility": [
+      {
+        "condition": "possible_nutrient_depletion",
+        "recommend": [
+          "soil testing before targeted nutrient correction",
+          "rebuild fertility according to test results",
+          "avoid guessing a specific nutrient deficiency from appearance alone"
+        ]
+      }
+    ],
+
+    "water_management": [
+      {
+        "condition": "surface_puddling_and_compaction",
+        "recommend": [
+          "treat soil structure and infiltration as primary constraints",
+          "avoid interpreting every puddle as an independent drainage problem"
+        ]
+      }
+    ],
+
+    "grazing_management": [
+      {
+        "condition": "active_overgrazing",
+        "recommend": [
+          "temporary grazing exclusion or reduced stocking pressure",
+          "controlled grazing after recovery",
+          "allow vegetation recovery periods"
+        ]
+      }
+    ]
+  },
+
+  "plant_selection": {
+    "selection_must_follow_diagnosis": true,
+    "criteria": [
+      "local_climate",
+      "water_availability",
+      "degree_of_compaction",
+      "fertility_status",
+      "rooting_ability",
+      "establishment_speed",
+      "restoration_goal",
+      "food_or_forage_goal"
+    ],
+    "rules": [
+      {
+        "condition": "severely_compacted_and_depleted",
+        "strategy": "prioritize hardy restorative vegetation and soil-cover species before demanding crops."
+      },
+      {
+        "condition": "soil_structure_improving",
+        "strategy": "gradually introduce more demanding crops appropriate to the local climate and soil."
+      },
+      {
+        "condition": "food_production_goal",
+        "strategy": "recommend crops only after checking whether remaining compaction and fertility permit reliable establishment."
+      }
+    ],
+    "output_requirement": "Every plant recommendation must include a reason tied to diagnosed site constraints."
+  },
+
+  "ongoing_management": {
+    "monitor": [
+      "soil_infiltration",
+      "surface_puddling",
+      "soil_surface_hardness",
+      "vegetation_density",
+      "bare_ground_percentage",
+      "plant_establishment",
+      "organic_matter_trends",
+      "signs_of_recompaction"
+    ],
+    "risks": [
+      "repeated_compaction",
+      "continued_overgrazing",
+      "erosion",
+      "runoff",
+      "slow_vegetation_establishment",
+      "persistent_fertility_depletion",
+      "weed_invasion",
+      "root_restriction"
+    ]
+  },
+
+  "timeline_logic": [
+    {
+      "phase": "initial_stabilization",
+      "focus": [
+        "remove_or_reduce_pressure",
+        "protect_bare_soil",
+        "begin_structure_recovery"
+      ]
+    },
+    {
+      "phase": "early_recovery",
+      "focus": [
+        "establish_ground_cover",
+        "increase_organic_inputs",
+        "improve_infiltration"
+      ]
+    },
+    {
+      "phase": "structural_recovery",
+      "focus": [
+        "maintain_vegetation",
+        "reduce_recompaction",
+        "build_root_activity",
+        "increase_soil_organic_matter"
+      ]
+    },
+    {
+      "phase": "long_term_recovery",
+      "focus": [
+        "maintain_cover",
+        "manage_grazing",
+        "monitor_fertility",
+        "adapt_management_to_soil_response"
+      ]
+    }
+  ],
+
+  "response_generation": {
+    "required_sections": [
+      "diagnosis",
+      "evidence",
+      "priority_actions",
+      "soil_recovery",
+      "plant_selection",
+      "ongoing_management",
+      "timeline",
+      "uncertainties"
+    ],
+    "diagnosis_format": "State the primary problem, secondary problem(s), evidence, and confidence.",
+    "evidence_format": "Tie each diagnosis to concrete observations from the image or description.",
+    "recommendation_format": "Give actions in priority order and explain why the order matters.",
+    "uncertainty_format": "Explicitly identify what cannot be established from visual evidence alone."
+  },
+
+  "failure_modes": [
+    "recommending crops before diagnosing soil condition",
+    "calling the entire problem simply 'poor soil'",
+    "ignoring compaction because vegetation is present",
+    "assuming every puddle proves compaction",
+    "assuming pale vegetation proves nitrogen deficiency",
+    "giving a generic crop list with no site-specific reasoning",
+    "ignoring continued grazing pressure",
+    "treating soil restoration as a one-time treatment",
+    "assuming every overgrazed site looks visually identical",
+    "using soil color alone as the diagnosis",
+    "claiming immediate recovery after one intervention"
+  ],
+
+  "unseen_test_target": {
+    "expected_observations": [
+      "hard-packed soil",
+      "bare worn patches",
+      "thin sparse grass",
+      "grass grazed close to ground",
+      "surface puddles after rain"
+    ],
+    "expected_diagnosis": {
+      "primary": "soil_compaction",
+      "secondary": [
+        "vegetation_degradation",
+        "possible_soil_depletion"
+      ],
+      "confidence": "high"
+    },
+    "expected_reasoning": [
+      "Hard-packed soil plus surface puddling indicates impaired infiltration and likely compaction.",
+      "Thin, heavily grazed grass and bare patches indicate severe vegetation degradation.",
+      "Long-term grazing pressure can also reduce organic matter and fertility.",
+      "The system should restore structure and prevent renewed degradation before expecting strong crop establishment."
+    ]
+  }
+}
